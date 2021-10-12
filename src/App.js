@@ -19,7 +19,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <h3>{now}</h3>
         <h4>
-          {`La valeur actuelle est de: `}<span style={{color: "green"}}>{tot}</span>
+          {`La valeur actuelle est de: `}<span style={{color: "green"}}>{parseFloat(tot).toFixed(5)}</span>
         </h4>
         <h5>
           Le pourcentage pour atteindre 0.1 est de: <span style={{color: "red"}}>{(parseFloat(tot*1000).toFixed(2))} %</span>
