@@ -4,6 +4,10 @@ import logo from './logo.jpg';
 import './App.css';
 
 function App() {
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   const [earnings, setEarnings] = useState([])
     useEffect(()=>{axios.get("https://hiveon.net/api/v1/stats/miner/1ad68e074d71c8fc6abe15187173767101d4c26e/ETH/billing-acc").then(res=>setEarnings(res.data)).catch(err=>console.log(err))}, [])
     const tot=earnings.totalUnpaid;
@@ -13,7 +17,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Mohamed HM</h1>
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} className="App-logo" alt="logo" onClick={refreshPage}/>
         <h3>{now}</h3>
         <h4>
           {`La valeur actuelle est de: `}<span style={{color: "green"}}>{parseFloat(tot).toFixed(5)}</span>
