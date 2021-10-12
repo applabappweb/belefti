@@ -5,10 +5,7 @@ import './App.css';
 
 function App() {
   const [earnings, setEarnings] = useState([])
-    useEffect(()=>{axios.get("https://hiveon.net/api/v1/stats/miner/1ad68e074d71c8fc6abe15187173767101d4c26e/ETH/billing-acc").then(res=>{
-        console.log(res);
-        setEarnings(res.data)
-    }).catch(err=>console.log(err))})
+    useEffect(()=>{axios.get("https://hiveon.net/api/v1/stats/miner/1ad68e074d71c8fc6abe15187173767101d4c26e/ETH/billing-acc").then(res=>setEarnings(res.data)).catch(err=>console.log(err))}, [])
     const tot=earnings.totalUnpaid;
     const act = new Date(); 
     const now =`${act.getDate()}/${act.getMonth()+1}/${act.getFullYear()} à ${act.getHours()}:${act.getMinutes()}:${((act.getSeconds() < 10)?"0":"") + act.getSeconds()}`;
