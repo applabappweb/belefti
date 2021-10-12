@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/belefti/static/css/main.d8245f4f.chunk.css",
+    "main.js": "/belefti/static/js/main.0acc60bd.chunk.js",
+    "main.js.map": "/belefti/static/js/main.0acc60bd.chunk.js.map",
+    "runtime-main.js": "/belefti/static/js/runtime-main.30670fdd.js",
+    "runtime-main.js.map": "/belefti/static/js/runtime-main.30670fdd.js.map",
+    "static/js/2.d079d66d.chunk.js": "/belefti/static/js/2.d079d66d.chunk.js",
+    "static/js/2.d079d66d.chunk.js.map": "/belefti/static/js/2.d079d66d.chunk.js.map",
+    "static/js/3.3ceef78b.chunk.js": "/belefti/static/js/3.3ceef78b.chunk.js",
+    "static/js/3.3ceef78b.chunk.js.map": "/belefti/static/js/3.3ceef78b.chunk.js.map",
+    "index.html": "/belefti/index.html",
+    "static/css/main.d8245f4f.chunk.css.map": "/belefti/static/css/main.d8245f4f.chunk.css.map",
+    "static/js/2.d079d66d.chunk.js.LICENSE.txt": "/belefti/static/js/2.d079d66d.chunk.js.LICENSE.txt",
+    "static/media/logo.689b0658.jpg": "/belefti/static/media/logo.689b0658.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.30670fdd.js",
+    "static/js/2.d079d66d.chunk.js",
+    "static/css/main.d8245f4f.chunk.css",
+    "static/js/main.0acc60bd.chunk.js"
+  ]
+}
