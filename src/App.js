@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Mohamed HM</h1>
-        <img src={logo} className="App-logo" alt="logo" onClick={refreshPage}/>
+        <img src={logo} className="App-logo" alt="logo" onClick={refreshPage} style={{cursor: 'pointer'}}/>
         <h3>{now}</h3>
         <h4>
           {`La valeur actuelle est de: `}<span style={{color: "green"}}>{parseFloat(tot).toFixed(5)}</span>
