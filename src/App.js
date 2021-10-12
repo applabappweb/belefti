@@ -15,6 +15,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Mohamed HM</h1>
         <img src={logo} className="App-logo" alt="logo" />
         <h3>{now}</h3>
         <h4>
