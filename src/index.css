@@ -12,4 +12,4 @@ code {
     monospace;
 }
 
-h1, h2, h3, h4, h5 {font-weight: normal !important; font-family: "Segoe UI" !important;}
+h1, h2, h3, h4, h5 {font-weight: normal !important; font-family: "Segoe UI" !important; padding: 20px;}
