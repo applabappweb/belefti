@@ -29,13 +29,13 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" onClick={refreshPage} style={{cursor: 'pointer'}}/>
         <h3>{now}</h3>
         <h4>
-          {`La valeur actuelle est de: `}<span style={{color: "green"}}>{parseFloat(tot).toFixed(5)}</span>
+          La valeur actuelle est de: <span style={{color: "#37b837"}}>{parseFloat(tot).toFixed(5)}</span><span style={{color: "#3c6bd4"}}>  (1E = {(parseFloat(cur).toFixed(2))} $)</span>
         </h4>
         <h4>
-          Le pourcentage pour atteindre 0.1 est de: <span style={{color: "red"}}>{(parseFloat(tot*1000).toFixed(2))} %</span>
+          Le pourcentage pour atteindre 0.1 est de: <span style={{color: "#d46565"}}>{(parseFloat(tot*1000).toFixed(2))} %</span>
         </h4>
         <h4>
-          Le Montant est de: <span style={{color: "yellow"}}>{(parseFloat(cur*tot*180).toFixed(2))} DA</span>
+          Le Montant est de: <span style={{color: "#e4d06e"}}>{(parseFloat(cur*tot*180).toFixed(2))} DA</span>
         </h4>
       </header>
       
