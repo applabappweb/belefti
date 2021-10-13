@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Mohamed HM</h1>
+        <h1 style={{color: "#c1aea8"}}>Mohamed HM</h1>
         <img src={logo} className="App-logo" alt="logo" onClick={refreshPage} style={{cursor: 'pointer'}}/>
         <h3>{now}</h3>
         <h4>
