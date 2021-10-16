@@ -63,9 +63,9 @@ function App() {
           <p>E. : <span style={{color: "#37b837"}}>{parseFloat(totalUnpaids).toFixed(5)}</span><span style={{color: "#3c6bd4"}}>  (1E. = ${(parseFloat(pricesUSD).toFixed(2))} | £{(parseFloat(pricesEUR).toFixed(2))})</span></p>
 
 
-          <p>%0.1E. : <span style={{color: "#d46565"}}>{(parseFloat(totalUnpaids*1000).toFixed(2))}%</span></p>
+          <p style={{color: "#d46565"}}>%0.1E. : {(parseFloat(totalUnpaids*1000).toFixed(2))}%</p>
 
-          <p>Mt : <span style={{color: "#e4d06e"}}>${(parseFloat(pricesUSD*totalUnpaids).toFixed(2))}</span> | <span style={{color: "#e4f05e"}}>£{(parseFloat(pricesEUR*totalUnpaids).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{(parseFloat(pricesUSD*totalUnpaids*182).toFixed(2))}DA</span></p>
+          <p>Mt : <span style={{color: "#e4d06e"}}>${(parseFloat(pricesUSD*totalUnpaids).toFixed(2))}</span> | <span style={{color: "#d46565"}}>{(parseFloat(pricesUSD*totalUnpaids*182).toFixed(2))}DA</span> | <span style={{color: "#e4d06e"}}>£{(parseFloat(pricesEUR*totalUnpaids).toFixed(2))}</span></p>
           
 
       </header>
