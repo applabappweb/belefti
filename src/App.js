@@ -4,39 +4,70 @@ import logo from './logo.jpg';
 import './App.css';
 
 function App() {
-  function refreshPage() {
+  const [totalUnpaids, setTotalUnpaids] = useState([])
+  const [pricesUSD, setPricesUSD] = useState([])
+  const [pricesEUR, setPricesEUR] = useState([])
+  const [times, setTimes] = useState([])
+
+  const refreshPage = () => {
     window.location.reload(false);
   }
 
-  const [earnings, setEarnings] = useState([])
-  const [prices, setPrices] = useState([])
+  const getData = async () => {
+    try {
+
+      const totalUnpaid = await axios.get("https://hiveon.net/api/v1/stats/miner/1ad68e074d71c8fc6abe15187173767101d4c26e/ETH/billing-acc")  
+      setTotalUnpaids(totalUnpaid.data.totalUnpaid);
+
+      const priceUSD = await axios.get("https://api.ethereumdb.com/v1/ticker?pair=ETH-USD&range=1h")
+      setPricesUSD(priceUSD.data.price);
+
+      const priceEUR = await axios.get("https://api.ethereumdb.com/v1/ticker?pair=ETH-EUR&range=1h")
+      setPricesEUR(priceEUR.data.price);
+    
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const getTime = async() => {try {
+    const newDate = await new Date(); 
+    setTimes(`${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()} - ${((newDate.getHours() < 10)?"0":"") + newDate.getHours()}:${((newDate.getMinutes() < 10)?"0":"") + newDate.getMinutes()}:${((newDate.getSeconds() < 10)?"0":"") + newDate.getSeconds()}`);
+
+  } catch (err) {
+    console.error(err.message);
+  }}
 
   useEffect(()=>{
-    axios.get("https://hiveon.net/api/v1/stats/miner/1ad68e074d71c8fc6abe15187173767101d4c26e/ETH/billing-acc").then(res=>setEarnings(res.data)).catch(err=>console.log(err));
-  
-    axios.get("https://api.ethereumdb.com/v1/ticker?pair=ETH-USD&range=1h").then(res=>setPrices(res.data)).catch(err=>console.log(err))
-  }, [])
+    getData()
+    getTime()
 
-  const cur = prices.price;
-  const tot=earnings.totalUnpaid;
-  const act = new Date(); 
-  const now =`${act.getDate()}/${act.getMonth()+1}/${act.getFullYear()} à ${((act.getHours() < 10)?"0":"") + act.getHours()}:${((act.getMinutes() < 10)?"0":"") + act.getMinutes()}:${((act.getSeconds() < 10)?"0":"") + act.getSeconds()}`;
+    const interval1=setInterval(()=>{
+      getTime()
+    },1000)
+
+    const interval2=setInterval(()=>{
+      getData()
+      
+    },60000)   
+       
+    return()=>{clearInterval(interval1); clearInterval(interval2)}}, [])
 
   return (
     <div className="App">
       <header className="App-header">
         <h1 style={{color: "#c1aea8"}}>Mohamed HM</h1>
-        <img src={logo} className="App-logo" alt="logo" onClick={refreshPage} style={{cursor: 'pointer'}}/>
-        <h3>{now}</h3>
-        <h4>
-          La valeur actuelle est de: <span style={{color: "#37b837"}}>{parseFloat(tot).toFixed(5)}</span><span style={{color: "#3c6bd4"}}>  (1E. = ${(parseFloat(cur).toFixed(2))})</span>
-        </h4>
-        <h4>
-          Le pourcentage pour atteindre 0.1E. est de: <span style={{color: "#d46565"}}>{(parseFloat(tot*1000).toFixed(2))} %</span>
-        </h4>
-        <h4>
-          Le Montant est de: <span style={{color: "#e4d06e"}}>{(parseFloat(cur*tot*180).toFixed(2))} DA</span>
-        </h4>
+        <img src={logo} className="App-logo" alt="logo" style={{cursor:"pointer"}} onClick={()=>refreshPage()}/>
+        <p>{times}</p>
+
+          <p>E. : <span style={{color: "#37b837"}}>{parseFloat(totalUnpaids).toFixed(5)}</span><span style={{color: "#3c6bd4"}}>  (1E. = ${(parseFloat(pricesUSD).toFixed(2))} | £{(parseFloat(pricesEUR).toFixed(2))})</span></p>
+
+
+          <p>% 0.1E. : <span style={{color: "#d46565"}}>{(parseFloat(totalUnpaids*1000).toFixed(2))} %</span></p>
+
+          <p>Mt : <span style={{color: "#e4d06e"}}>${(parseFloat(pricesUSD*totalUnpaids).toFixed(2))}</span> | <span style={{color: "#e4f05e"}}>£{(parseFloat(pricesEUR*totalUnpaids).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{(parseFloat(pricesUSD*totalUnpaids*182).toFixed(2))}DA</span></p>
+          
+
       </header>
       
     </div>
