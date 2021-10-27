@@ -81,7 +81,7 @@ function App() {
             />
           </Circle>
 
-          <p>Mt : <span style={{color: "#e4d06e"}}>${(parseFloat(pricesUSD*totalUnpaids).toFixed(2))}</span> | <span style={{color: "#d46565"}}>{(parseFloat(pricesUSD*totalUnpaids*182).toFixed(2))}DA</span> | <span style={{color: "#e4d06e"}}>£{(parseFloat(pricesEUR*totalUnpaids).toFixed(2))}</span></p>
+          <p><span style={{color: "#e4d06e"}}>${(parseFloat(pricesUSD*totalUnpaids).toFixed(2))}</span> | <span style={{color: "#d46565"}}>{(parseFloat(pricesUSD*totalUnpaids*182).toFixed(2))}DA</span> | <span style={{color: "#e4d06e"}}>£{(parseFloat(pricesEUR*totalUnpaids).toFixed(2))}</span></p>
           
 
       </header>
