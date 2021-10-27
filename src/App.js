@@ -51,7 +51,7 @@ function App() {
 
     const interval1=setInterval(()=>{
       getTime()
-    },100000)
+    },1000)
 
     const interval2=setInterval(()=>{
       getData()
