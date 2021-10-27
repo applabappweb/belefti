@@ -91,13 +91,11 @@ function App() {
 
   function Circle(props) {
     return (
-      <div style={{ marginBottom: 10 }}>
-        <div style={{ marginTop: 30, display: "block", width: 100 }}>
-          <div style={{ height: "30%" }}>{props.children}</div>
-          <div style={{ height: "70%" }}>
-            <h3 className="h5">{props.label}</h3>
-            <p>{props.description}</p>
-          </div>
+      <div style={{ marginTop: 20, display: "block", width: 100 }}>
+        <div style={{ height: "30%" }}>{props.children}</div>
+        <div style={{ height: "70%" }}>
+          <h3 className="h5">{props.label}</h3>
+          <p>{props.description}</p>
         </div>
       </div>
     );
