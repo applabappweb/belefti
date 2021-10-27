@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+
+import {
+  CircularProgressbar,
+  buildStyles
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+
 import logo from './logo.jpg';
 import './App.css';
 
@@ -44,7 +51,7 @@ function App() {
 
     const interval1=setInterval(()=>{
       getTime()
-    },1000)
+    },100000)
 
     const interval2=setInterval(()=>{
       getData()
@@ -60,10 +67,19 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" style={{cursor:"pointer"}} onClick={()=>refreshPage()}/>
         <p>{times}</p>
 
-          <p>E. : <span style={{color: "#37b837"}}>{parseFloat(totalUnpaids).toFixed(5)}</span><span style={{color: "#3c6bd4"}}>  (1E. = ${(parseFloat(pricesUSD).toFixed(2))} | £{(parseFloat(pricesEUR).toFixed(2))})</span></p>
+          <p><span style={{color: "#e4d06e"}}>  ${(parseFloat(pricesUSD).toFixed(2))} | £{(parseFloat(pricesEUR).toFixed(2))}</span></p>
 
-
-          %0.1E. : <p style={{color: "#d46565"}}>{(parseFloat(totalUnpaids*1000).toFixed(2))}%</p>
+          <Circle label="">
+            <CircularProgressbar
+              value={(parseFloat(totalUnpaids*1000).toFixed(2))}
+              text={`${(parseFloat(totalUnpaids*1000).toFixed(2))}%`}
+              styles={buildStyles({
+                textColor: "#d46565",
+                pathColor: "#941717",
+                trailColor: "#c1aea8"
+              })}
+            />
+          </Circle>
 
           <p>Mt : <span style={{color: "#e4d06e"}}>${(parseFloat(pricesUSD*totalUnpaids).toFixed(2))}</span> | <span style={{color: "#d46565"}}>{(parseFloat(pricesUSD*totalUnpaids*182).toFixed(2))}DA</span> | <span style={{color: "#e4d06e"}}>£{(parseFloat(pricesEUR*totalUnpaids).toFixed(2))}</span></p>
           
@@ -72,6 +88,20 @@ function App() {
       
     </div>
   );
+
+  function Circle(props) {
+    return (
+      <div style={{ marginBottom: 10 }}>
+        <div style={{ marginTop: 30, display: "block", width: 100 }}>
+          <div style={{ height: "30%" }}>{props.children}</div>
+          <div style={{ height: "70%" }}>
+            <h3 className="h5">{props.label}</h3>
+            <p>{props.description}</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
