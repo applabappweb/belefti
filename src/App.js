@@ -12,6 +12,7 @@ import './App.css';
 
 function App() {
   const [totalUnpaids, setTotalUnpaids] = useState([])
+  const [totalPaids, setTotalPaids] = useState([])
   const [pricesUSD, setPricesUSD] = useState([])
   const [pricesEUR, setPricesEUR] = useState([])
   const [times, setTimes] = useState([])
@@ -23,8 +24,9 @@ function App() {
   const getData = async () => {
     try {
 
-      const totalUnpaid = await axios.get("https://hiveon.net/api/v1/stats/miner/1ad68e074d71c8fc6abe15187173767101d4c26e/ETH/billing-acc")  
+      const totalUnpaid = await axios.get("https://hiveon.net/api/v1/stats/miner/1ad68e074d71c8fc6abe15187173767101d4c26e/ETH/billing-acc")
       setTotalUnpaids(totalUnpaid.data.totalUnpaid);
+      setTotalPaids(totalUnpaid.data.totalPaid);
 
       const priceUSD = await axios.get("https://api.ethereumdb.com/v1/ticker?pair=ETH-USD&range=1h")
       setPricesUSD(priceUSD.data.price);
@@ -66,23 +68,32 @@ function App() {
         <h1 style={{color: "#c1aea8"}}>Mohamed HM</h1>
         <img src={logo} className="App-logo" alt="logo" style={{cursor:"pointer"}} onClick={()=>refreshPage()}/>
         <p>{times}</p>
+        
+        <p>
+          <span class="iconify" data-icon="mdi:ethereum" style={{paddingRight: 5, height: 14}}></span><span style={{color: "#6ee49d"}}>{(parseFloat(pricesUSD).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{(parseFloat(pricesUSD*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{(parseFloat(pricesEUR).toFixed(2))}€</span>
+        </p>
 
-          <p><span style={{color: "#e4d06e"}}>  ${(parseFloat(pricesUSD).toFixed(2))} | £{(parseFloat(pricesEUR).toFixed(2))}</span></p>
+        <Circle label="">
+          <CircularProgressbar
+            value={(parseFloat(totalUnpaids*1000).toFixed(2))}
+            text={`${(parseFloat(totalUnpaids*1000).toFixed(2))}%`}
+            styles={buildStyles({
+              textColor: "#d46565",
+              pathColor: "#941717",
+              trailColor: "#c1aea8"
+            })}
+          />
+        </Circle>          
 
-          <Circle label="">
-            <CircularProgressbar
-              value={(parseFloat(totalUnpaids*1000).toFixed(2))}
-              text={`${(parseFloat(totalUnpaids*1000).toFixed(2))}%`}
-              styles={buildStyles({
-                textColor: "#d46565",
-                pathColor: "#941717",
-                trailColor: "#c1aea8"
-              })}
-            />
-          </Circle>
+        <p>
+        <span class="iconify" data-icon="clarity:resource-pool-solid" style={{paddingRight: 5, height: 13}}></span>
+        <span style={{color: "#6ee49d"}}>{(parseFloat(pricesUSD*totalUnpaids).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{(parseFloat(pricesUSD*totalUnpaids*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{(parseFloat(pricesEUR*totalUnpaids).toFixed(2))}€</span>
+        </p>
 
-          <p><span style={{color: "#e4d06e"}}>${(parseFloat(pricesUSD*totalUnpaids).toFixed(2))}</span> | <span style={{color: "#d46565"}}>{(parseFloat(pricesUSD*totalUnpaids*182).toFixed(2))}DA</span> | <span style={{color: "#e4d06e"}}>£{(parseFloat(pricesEUR*totalUnpaids).toFixed(2))}</span></p>
-          
+        {Number.isNaN(parseFloat(totalPaids))? "": <p>
+          <span class="iconify" data-icon="clarity:wallet-solid" style={{paddingRight: 5, height: 13}}></span>
+          <span style={{color: "#6ee49d"}}>{(parseFloat(pricesUSD*totalPaids).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{(parseFloat(pricesUSD*totalPaids*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{(parseFloat(pricesEUR*totalPaids).toFixed(2))}€</span>
+        </p>}          
 
       </header>
       

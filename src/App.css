@@ -30,6 +30,14 @@
   color: #61dafb;
 }
 
+p {
+  margin: 0.5rem
+}
+
+.iconify {
+  color: #c1aea8
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
