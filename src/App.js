@@ -7,7 +7,6 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-// import logo from './logo.jpg';
 import './App.css';
 
 function App() {
@@ -65,10 +64,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 style={{color: "#c1aea8"}}>Mohamed HM</h1>
-        <div className="headshot App-logo" style={{cursor:"pointer"}} onClick={()=>refreshPage()}></div>
-        <p style={{color: "#c1aea8"}}>{times}</p>
-        
+        <div className="heading-frame" style={{cursor:"pointer"}} onClick={()=>refreshPage()}>
+          <h7>Mohamed HM <br/>{times}</h7>
+        </div>
+        <br/>        
         <p style={{color: "#c1aea8"}}>
           <span class="iconify" data-icon="mdi:ethereum" style={{paddingRight: 5, height: 14}}></span><span style={{color: "#6ee49d"}}>{numberWithCommas(parseFloat(pricesUSD).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{numberWithCommas(parseFloat(pricesUSD*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{numberWithCommas(parseFloat(pricesEUR).toFixed(2))}€</span>
         </p>
