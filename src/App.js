@@ -7,7 +7,7 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-import logo from './logo.jpg';
+// import logo from './logo.jpg';
 import './App.css';
 
 function App() {
@@ -66,11 +66,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1 style={{color: "#c1aea8"}}>Mohamed HM</h1>
-        <img src={logo} className="App-logo" alt="logo" style={{cursor:"pointer"}} onClick={()=>refreshPage()}/>
-        <p>{times}</p>
+        <div className="headshot App-logo" style={{cursor:"pointer"}} onClick={()=>refreshPage()}></div>
+        <p style={{color: "#c1aea8"}}>{times}</p>
         
-        <p>
-          <span class="iconify" data-icon="mdi:ethereum" style={{paddingRight: 5, height: 14}}></span><span style={{color: "#6ee49d"}}>{(parseFloat(pricesUSD).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{(parseFloat(pricesUSD*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{(parseFloat(pricesEUR).toFixed(2))}€</span>
+        <p style={{color: "#c1aea8"}}>
+          <span class="iconify" data-icon="mdi:ethereum" style={{paddingRight: 5, height: 14}}></span><span style={{color: "#6ee49d"}}>{numberWithCommas(parseFloat(pricesUSD).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{numberWithCommas(parseFloat(pricesUSD*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{numberWithCommas(parseFloat(pricesEUR).toFixed(2))}€</span>
         </p>
 
         <Circle label="">
@@ -85,14 +85,14 @@ function App() {
           />
         </Circle>          
 
-        <p>
+        <p style={{color: "#c1aea8"}}>
         <span class="iconify" data-icon="clarity:resource-pool-solid" style={{paddingRight: 5, height: 13}}></span>
-        <span style={{color: "#6ee49d"}}>{(parseFloat(pricesUSD*totalUnpaids).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{(parseFloat(pricesUSD*totalUnpaids*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{(parseFloat(pricesEUR*totalUnpaids).toFixed(2))}€</span>
+        <span style={{color: "#6ee49d"}}>{numberWithCommas(parseFloat(pricesUSD*totalUnpaids).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{numberWithCommas(parseFloat(pricesUSD*totalUnpaids*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{numberWithCommas(parseFloat(pricesEUR*totalUnpaids).toFixed(2))}€</span>
         </p>
 
-        {Number.isNaN(parseFloat(totalPaids))? "": <p>
+        {Number.isNaN(parseFloat(totalPaids))? "": <p style={{color: "#c1aea8"}}>
           <span class="iconify" data-icon="clarity:wallet-solid" style={{paddingRight: 5, height: 13}}></span>
-          <span style={{color: "#6ee49d"}}>{(parseFloat(pricesUSD*totalPaids).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{(parseFloat(pricesUSD*totalPaids*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{(parseFloat(pricesEUR*totalPaids).toFixed(2))}€</span>
+          <span style={{color: "#6ee49d"}}>{numberWithCommas(parseFloat(pricesUSD*totalPaids).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{numberWithCommas(parseFloat(pricesUSD*totalPaids*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{numberWithCommas(parseFloat(pricesEUR*totalPaids).toFixed(2))}€</span>
         </p>}          
 
       </header>
@@ -110,6 +110,9 @@ function App() {
         </div>
       </div>
     );
+  }
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 }
 
