@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/belefti/static/css/main.09fbabb3.chunk.css",
-    "main.js": "/belefti/static/js/main.e1cd666c.chunk.js",
-    "main.js.map": "/belefti/static/js/main.e1cd666c.chunk.js.map",
+    "main.js": "/belefti/static/js/main.77918b9c.chunk.js",
+    "main.js.map": "/belefti/static/js/main.77918b9c.chunk.js.map",
     "runtime-main.js": "/belefti/static/js/runtime-main.f16dd9be.js",
     "runtime-main.js.map": "/belefti/static/js/runtime-main.f16dd9be.js.map",
     "static/css/2.6c0f60ba.chunk.css": "/belefti/static/css/2.6c0f60ba.chunk.css",
@@ -21,6 +21,6 @@
     "static/css/2.6c0f60ba.chunk.css",
     "static/js/2.09d61e19.chunk.js",
     "static/css/main.09fbabb3.chunk.css",
-    "static/js/main.e1cd666c.chunk.js"
+    "static/js/main.77918b9c.chunk.js"
   ]
 }
