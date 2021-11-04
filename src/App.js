@@ -27,10 +27,24 @@ function App() {
       setTotalUnpaids(totalUnpaid.data.totalUnpaid);
       setTotalPaids(totalUnpaid.data.totalPaid);
 
-      const priceUSD = await axios.get("https://api.ethereumdb.com/v1/ticker?pair=ETH-USD&range=1h")
+      // const priceUSD = await axios.get("https://api.ethereumdb.com/v1/ticker?pair=ETH-USD&range=1h")
+      // setPricesUSD(priceUSD.data.price);
+
+      // const priceEUR = await axios.get("https://api.ethereumdb.com/v1/ticker?pair=ETH-EUR&range=1h")
+      // setPricesEUR(priceEUR.data.price);
+    
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const getEth = async () => {
+    try {
+
+      const priceUSD = await axios.get("https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT")
       setPricesUSD(priceUSD.data.price);
 
-      const priceEUR = await axios.get("https://api.ethereumdb.com/v1/ticker?pair=ETH-EUR&range=1h")
+      const priceEUR = await axios.get("https://api.binance.com/api/v3/ticker/price?symbol=ETHEUR")
       setPricesEUR(priceEUR.data.price);
     
     } catch (err) {
@@ -52,12 +66,12 @@ function App() {
 
     const interval1=setInterval(()=>{
       getTime()
+      getEth()
     },1000)
 
     const interval2=setInterval(()=>{
-      getData()
-      
-    },60000)   
+      getData()      
+    },30000)   
        
     return()=>{clearInterval(interval1); clearInterval(interval2)}}, [])
 
@@ -65,12 +79,12 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="heading-frame" style={{cursor:"pointer"}} onClick={()=>refreshPage()}>
-          <h7>Mohamed HM <br/>{times}</h7>
+          <span>Mohamed HM <br/>{times}</span>
         </div>
         <br/>        
-        <p style={{color: "#c1aea8"}}>
-          <span class="iconify" data-icon="mdi:ethereum" style={{paddingRight: 5, height: 14}}></span><span style={{color: "#6ee49d"}}>{numberWithCommas(parseFloat(pricesUSD).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{numberWithCommas(parseFloat(pricesUSD*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{numberWithCommas(parseFloat(pricesEUR).toFixed(2))}€</span>
-        </p>
+        {Number.isNaN(parseFloat(pricesUSD))? "": <p style={{color: "#c1aea8"}}>
+          <span className="iconify" data-icon="mdi:ethereum" style={{paddingRight: 5, height: 14}}></span><span style={{color: "#6ee49d"}}>{numberWithCommas(parseFloat(pricesUSD).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{numberWithCommas(parseFloat(pricesUSD*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{numberWithCommas(parseFloat(pricesEUR).toFixed(2))}€</span>
+        </p>}
 
         <Circle label="">
           <CircularProgressbar
@@ -84,13 +98,13 @@ function App() {
           />
         </Circle>          
 
-        <p style={{color: "#c1aea8"}}>
-        <span class="iconify" data-icon="clarity:resource-pool-solid" style={{paddingRight: 5, height: 13}}></span>
+        {Number.isNaN(parseFloat(pricesUSD))? "": <p style={{color: "#c1aea8"}}>
+        <span className="iconify" data-icon="clarity:resource-pool-solid" style={{paddingRight: 5, height: 13}}></span>
         <span style={{color: "#6ee49d"}}>{numberWithCommas(parseFloat(pricesUSD*totalUnpaids).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{numberWithCommas(parseFloat(pricesUSD*totalUnpaids*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{numberWithCommas(parseFloat(pricesEUR*totalUnpaids).toFixed(2))}€</span>
-        </p>
+        </p>}
 
         {Number.isNaN(parseFloat(totalPaids))? "": <p style={{color: "#c1aea8"}}>
-          <span class="iconify" data-icon="clarity:wallet-solid" style={{paddingRight: 5, height: 13}}></span>
+          <span className="iconify" data-icon="clarity:wallet-solid" style={{paddingRight: 5, height: 13}}></span>
           <span style={{color: "#6ee49d"}}>{numberWithCommas(parseFloat(pricesUSD*totalPaids).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{numberWithCommas(parseFloat(pricesUSD*totalPaids*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{numberWithCommas(parseFloat(pricesEUR*totalPaids).toFixed(2))}€</span>
         </p>}          
 
