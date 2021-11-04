@@ -80,11 +80,7 @@ function App() {
       <header className="App-header">
         <div className="heading-frame" style={{cursor:"pointer"}} onClick={()=>refreshPage()}>
           <span>Mohamed HM <br/>{times}</span>
-        </div>
-        <br/>        
-        {Number.isNaN(parseFloat(pricesUSD))? "": <p style={{color: "#c1aea8"}}>
-          <span className="iconify" data-icon="mdi:ethereum" style={{paddingRight: 5, height: 14}}></span><span style={{color: "#6ee49d"}}>{numberWithCommas(parseFloat(pricesUSD).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{numberWithCommas(parseFloat(pricesUSD*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{numberWithCommas(parseFloat(pricesEUR).toFixed(2))}€</span>
-        </p>}
+        </div>      
 
         <Circle label="">
           <CircularProgressbar
@@ -96,7 +92,11 @@ function App() {
               trailColor: "#c1aea8"
             })}
           />
-        </Circle>          
+        </Circle> 
+
+        {Number.isNaN(parseFloat(pricesUSD))? "": <p style={{color: "#c1aea8"}}>
+          <span className="iconify" data-icon="mdi:ethereum" style={{paddingRight: 5, height: 14}}></span><span style={{color: "#6ee49d"}}>{numberWithCommas(parseFloat(pricesUSD).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{numberWithCommas(parseFloat(pricesUSD*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{numberWithCommas(parseFloat(pricesEUR).toFixed(2))}€</span>
+        </p>}
 
         {Number.isNaN(parseFloat(pricesUSD))? "": <p style={{color: "#c1aea8"}}>
         <span className="iconify" data-icon="clarity:resource-pool-solid" style={{paddingRight: 5, height: 13}}></span>
