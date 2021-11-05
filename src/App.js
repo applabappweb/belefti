@@ -75,24 +75,51 @@ function App() {
        
     return()=>{clearInterval(interval1); clearInterval(interval2)}}, [])
 
+    
+
   return (
     <div className="App">
       <header className="App-header">
         <div className="heading-frame" style={{cursor:"pointer"}} onClick={()=>refreshPage()}>
           <span>Mohamed HM <br/>{times}</span>
-        </div>      
+        </div>    
 
-        <Circle label="">
-          <CircularProgressbar
-            value={(parseFloat(totalUnpaids*1000).toFixed(2))}
-            text={`${(parseFloat(totalUnpaids*1000).toFixed(2))}%`}
-            styles={buildStyles({
-              textColor: "#d46565",
-              pathColor: "#941717",
-              trailColor: "#c1aea8"
-            })}
-          />
-        </Circle> 
+        <Circle>
+          <Circle100>
+          {Number.isNaN(parseFloat(totalPaids))? <CircularProgressbar
+              value={(parseFloat(totalUnpaids*100).toFixed(2))}
+              strokeWidth={50}
+              styles={buildStyles({
+                strokeLinecap: "butt",
+                pathColor: "#0d5a7f",
+                trailColor: "#333",
+                width: "80%"
+              })}
+            />: <CircularProgressbar
+              value={(parseFloat((totalPaids+totalUnpaids)*100).toFixed(2))}
+              strokeWidth={50}
+              styles={buildStyles({
+                strokeLinecap: "butt",
+                pathColor: "#0d5a7f",
+                trailColor: "#333",
+                width: "80%"
+              })}
+            />}
+          </Circle100>
+
+          <Circle10>
+            <CircularProgressbar
+              value={(parseFloat(totalUnpaids*1000).toFixed(2))}
+              text={`${(parseFloat(totalUnpaids*1000).toFixed(2))}%`}
+              styles={buildStyles({
+                strokeLinecap: "butt",
+                textColor: "#c1aea8",
+                pathColor: "#941717",
+                trailColor: "#c1aea8"
+              })}
+            />
+          </Circle10>
+        </Circle>
 
         {Number.isNaN(parseFloat(pricesUSD))? "": <p style={{color: "#c1aea8"}}>
           <span className="iconify" data-icon="mdi:ethereum" style={{paddingRight: 5, height: 14}}></span><span style={{color: "#6ee49d"}}>{numberWithCommas(parseFloat(pricesUSD).toFixed(2))}$</span> | <span style={{color: "#d46565"}}>{numberWithCommas(parseFloat(pricesUSD*180).toFixed(2))}</span> | <span style={{color: "#e4d06e"}}>{numberWithCommas(parseFloat(pricesEUR).toFixed(2))}€</span>
@@ -115,15 +142,47 @@ function App() {
 
   function Circle(props) {
     return (
-      <div style={{ marginTop: 20, display: "block", width: 100 }}>
-        <div style={{ height: "30%" }}>{props.children}</div>
-        <div style={{ height: "70%" }}>
-          <h3 className="h5">{props.label}</h3>
-          <p>{props.description}</p>
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "30%",
+          width: 100,
+          marginTop: 20,
+          marginBottom: 20
+        }}>
+          {props.children}
         </div>
-      </div>
     );
   }
+
+  function Circle100(props) {
+    return (
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "absolute",
+          width: 100
+        }}>
+          {props.children}
+        </div>
+    );
+  }
+
+  function Circle10(props) {
+    return (
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 1
+        }}>
+          {props.children}
+        </div>
+    );
+  }
+
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
