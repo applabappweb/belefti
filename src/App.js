@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
+import {Helmet} from "react-helmet"
 import axios from 'axios'
 
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
@@ -90,6 +91,9 @@ function App() {
 
   return (
     <div className="App">
+      <Helmet>
+        <title>{`${parseFloat(totalUnpaids * 1000).toFixed(2)}%`}</title>
+      </Helmet>
       <header className="App-header">
         <div
           className="heading-frame"
