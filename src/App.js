@@ -19,8 +19,10 @@ function App() {
 
   const getData = async () => {
     try {
+      let wallet = process.env.ETH_WALLET || "0x1ad68e074d71c8fc6abe15187173767101d4c26e"
+      wallet = wallet.replace("0x", "")
       const totalUnpaid = await axios.get(
-        "https://hiveon.net/api/v1/stats/miner/1ad68e074d71c8fc6abe15187173767101d4c26e/ETH/billing-acc"
+        `https://hiveon.net/api/v1/stats/miner/${wallet}/ETH/billing-acc`
       );
       setTotalUnpaids(totalUnpaid.data.totalUnpaid);
       setTotalPaids(totalUnpaid.data.totalPaid);
@@ -78,7 +80,7 @@ function App() {
 
     const interval2 = setInterval(() => {
       getData();
-    }, 30000);
+    }, 1000);
 
     return () => {
       clearInterval(interval1);
@@ -95,8 +97,7 @@ function App() {
           onClick={() => refreshPage()}
         >
           <span>
-            Mohamed HM <br />
-            {times}
+            Mohamed HM<br />{times}
           </span>
         </div>
 
@@ -152,13 +153,9 @@ function App() {
             ></span>
             <span style={{ color: "#6ee49d" }}>
               {numberWithCommas(parseFloat(pricesUSD).toFixed(2))}$
-            </span>{" "}
-            |{" "}
-            <span style={{ color: "#d46565" }}>
+            </span> | <span style={{ color: "#d46565" }}>
               {numberWithCommas(parseFloat(pricesUSD * 180).toFixed(2))}
-            </span>{" "}
-            |{" "}
-            <span style={{ color: "#e4d06e" }}>
+            </span> | <span style={{ color: "#e4d06e" }}>
               {numberWithCommas(parseFloat(pricesEUR).toFixed(2))}€
             </span>
           </p>
@@ -178,15 +175,11 @@ function App() {
                 parseFloat(pricesUSD * totalUnpaids).toFixed(2)
               )}
               $
-            </span>{" "}
-            |{" "}
-            <span style={{ color: "#d46565" }}>
+              </span> | <span style={{ color: "#d46565" }}>
               {numberWithCommas(
                 parseFloat(pricesUSD * totalUnpaids * 180).toFixed(2)
               )}
-            </span>{" "}
-            |{" "}
-            <span style={{ color: "#e4d06e" }}>
+            </span> | <span style={{ color: "#e4d06e" }}>
               {numberWithCommas(
                 parseFloat(pricesEUR * totalUnpaids).toFixed(2)
               )}
@@ -199,22 +192,14 @@ function App() {
           ""
         ) : (
           <p style={{ color: "#c1aea8" }}>
-            <span
-              className="iconify"
-              data-icon="clarity:wallet-solid"
-              style={{ paddingRight: 5, height: 13 }}
-            ></span>
+            <span className="iconify" data-icon="clarity:wallet-solid" style={{ paddingRight: 5, height: 13 }}></span>
             <span style={{ color: "#6ee49d" }}>
               {numberWithCommas(parseFloat(pricesUSD * totalPaids).toFixed(2))}$
-            </span>{" "}
-            |{" "}
-            <span style={{ color: "#d46565" }}>
+            </span> | <span style={{ color: "#d46565" }}>
               {numberWithCommas(
                 parseFloat(pricesUSD * totalPaids * 180).toFixed(2)
               )}
-            </span>{" "}
-            |{" "}
-            <span style={{ color: "#e4d06e" }}>
+            </span> | <span style={{ color: "#e4d06e" }}>
               {numberWithCommas(parseFloat(pricesEUR * totalPaids).toFixed(2))}€
             </span>
           </p>
